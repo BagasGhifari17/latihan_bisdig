@@ -1,80 +1,81 @@
-    // Deklarasi Variabel
+document.addEventListener("DOMContentLoaded", () => {
+  const toast = document.getElementById("toast");
+  const darkToggle = document.getElementById("darkToggle");
+  const clock = document.getElementById("clock");
+  const quote = document.getElementById("quote");
 
-    var myVariable = "This is a variable!";
-    console.log(myVariable);
+  // Toast function
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3000);
+  }
 
-    // Menggunakan Variabel
-    
-    var number1 = 5;
-    number1 = 3;
-    console.log(number1); // 3
-    window.alert(number1); // 3
+  // Clock
+  function updateClock() {
+    const now = new Date();
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    clock.textContent =
+      now.toLocaleDateString("id-ID", options) +
+      " | " +
+      now.toLocaleTimeString("id-ID");
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
 
-    number1 = number1 + 5; // 3 + 5 = 8
-    console.log(number1); // 8
+  // Quotes
+  const quotes = [
+    "Less noise, more clarity.",
+    "Good design is good mood.",
+    "Keep it simple.",
+    "Focus on what matters.",
+  ];
+  quote.textContent = quotes[Math.floor(Math.random() * quotes.length)];
 
-    number1 = number1 - 6; // 8 - 6 = 2
-    console.log(number1); // 2
+  // Dark Mode toggle
+  darkToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    darkToggle.textContent = document.body.classList.contains("dark")
+      ? "☀️ Light Mode"
+      : "🌙 Dark Mode";
+    showToast(
+      document.body.classList.contains("dark")
+        ? "Dark mode aktif 🌙"
+        : "Light mode aktif ☀️"
+    );
+  });
 
-    var number2 = number1 * 10; // 2 * 10 = 20
-    console.log(number2); // 20
+  // Hero button
+  document.getElementById("heroAction").addEventListener("click", () => {
+    showToast("Santuy aja 😌");
+  });
 
-    var number3 = number2 / number1; // 20 / 2 = 10
-    console.log(number3); // 10
+  // Progress bar
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const docHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+    const percent = (scrollTop / docHeight) * 100;
+    document.getElementById("progress-bar").style.width = percent + "%";
+  });
 
-    var myString = "I am a " + "string!!";
-    console.log(myString);
+  // Fade-in
+  const faders = document.querySelectorAll(".fade-in");
+  function checkFade() {
+    const trigger = window.innerHeight * 0.85;
+    faders.forEach((el) => {
+      const top = el.getBoundingClientRect().top;
+      if (top < trigger) el.classList.add("visible");
+    });
+  }
+  checkFade();
+  window.addEventListener("scroll", checkFade);
 
-    
-    // Type Variabel
-    
-    var myInteger = 12; // 32-bit number
-    var myLong = 9130141419482; // 64-bit number
-    var myFloat = 5.5; // floating point number
-    var myDouble = 9130141419482.22; // 64-bit floating number
-    var myBoolean = true; // boolean
-    var myBoolean2 = false;
-    var myNotANumber = NaN;
-    var NaN_Example = 0 / 0; // NaN
-    var notDefined; // undefined
-    var myNull = null;
-
-    console.log(myInteger, myLong, myFloat, myDouble, myBoolean, myBoolean2, myNotANumber, NaN_Example, notDefined, myNull);
-
-    
-    // Arrays dan Objects
-    
-    var myArray = []; // empty array
-    var favoriteFruits = ["apple", "orange", "strawberry"];
-    var carsInParkingLot = ["Toyota", "Ferrari", "Lexus"];
-    var employees = ["Billy", "Bob", "Joe"];
-    var primeNumbers = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31];
-    var randomVariables = [2, "any type works", undefined, null, true, 2.51];
-    myArray = ["zero", "one", "two"];
-
-    console.log(myArray[0]); // "zero"
-    console.log(employees[0]); // "Billy"
-
-    var elementNumber = 1;
-    console.log(employees[elementNumber]); // "Bob"
-
-    var myObject = {};
-
-    // Object dengan Property
-   
-    var john = { firstname: "John", lastname: "Doe", fullname: "John Doe" };
-    var billy = { firstname: "Billy", lastname: undefined, fullname: "Billy" };
-
-    console.log(john.fullname); // John Doe
-    console.log(billy.firstname); // Billy
-    alert("Apakah anda akan terus melanjutkan meskipun anda mengetahui bahwa ini tidak mudah?"); 
-    confirm("Yakin masih mau  lanjut?");
-    confirm("yakinnn???")
-    prompt("Welcome to Pojok Wareg Crew")
-    Date("19-10-2007")
-    parseInt("FalsePhropet")
-    setTimeout("FalsePhropet,1000")
-    function foo() {
-alert("YOOO WELCOMEE!!!");
-} foo(); a
-
+  // Welcome toast
+  showToast("Selamat datang 🎉");
+});
